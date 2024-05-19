@@ -9,7 +9,7 @@ protected:
 	float y;
 	string type;
 public:
-	Gems() : x(0), y(0), type("") {}
+	Gems() : x(10), y(10), type("") {}
 	Gems(float a, float b, string c) : x(a), y(b), type(c) {}
 	virtual void move() = 0;
 	virtual void draw() = 0;
