@@ -1,11 +1,12 @@
 #pragma once
 #include<glut.h>
 #include<string>
+
 using namespace std;
 class Gems {
 protected:
-	float x = 100;
-	float y = 100;
+	float x;
+	float y;
 	string type;
 public:
 	Gems() : x(0), y(0), type("") {}
