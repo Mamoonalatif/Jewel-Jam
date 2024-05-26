@@ -1,8 +1,12 @@
 #pragma once
+#include"Triangle.h"
+#include"Circle.h"
+#include"Rectangle.h"
+#include"Diamond.h"
+#include"Square.h"
+#include"Gems.h"
 #include <cstdlib>
 #include <ctime>
-#include"Triangle.h"
-#include"Gems.h"
 class GameBoard {
     public:
    Gems* gem[10][10];
@@ -18,9 +22,6 @@ class GameBoard {
     const float BOARD_OFFSET_Y = CELL_SIZE;
 public:
     GameBoard() : progress(0), level(1), lives(3) {
-        srand(time(0)); 
-        placeTriangles();
- 
     }
     void generateboard() {
         glClear(GL_COLOR_BUFFER_BIT);
@@ -41,7 +42,7 @@ public:
                 float x_offset = x_start + j * cell_size;
                 float y_offset = y_start + i * cell_size;
                 //Squares
-                glColor3f(0.8f, 0.6f, 0.4f); 
+                glColor3f(0.8f, 0.6f, 0.4f);
                 glBegin(GL_POLYGON);
                 glVertex2f(x_offset, y_offset);
                 glVertex2f(x_offset + cell_size, y_offset);
@@ -49,7 +50,7 @@ public:
                 glVertex2f(x_offset, y_offset + cell_size);
                 glEnd();
                 //Inner borders
-                glColor3f(0.7f, 0.5f, 0.3f); 
+                glColor3f(0.7f, 0.5f, 0.3f);
                 glLineWidth(1.0f);
                 glBegin(GL_LINE_LOOP);
                 glVertex2f(x_offset, y_offset);
@@ -62,17 +63,5 @@ public:
 
         glFlush();
     }
-    void placeTriangles() {
-        const int sidelength = 30;
-        for (int i = 0; i < NUM_ROWS; ++i) {
-            for (int j = 0; j < NUM_COLS; ++j) {
-                float x_offset = BOARD_OFFSET_X + j * CELL_SIZE + (CELL_SIZE - sidelength) / 2.0f;
-                float y_offset = BOARD_OFFSET_Y + i * CELL_SIZE + (CELL_SIZE - sidelength) / 2.0f;
-                gem[i][j] = new Triangle(x_offset, y_offset);
-            }
-        }
-    }
 
-
-    
 };
