@@ -1,18 +1,20 @@
 #pragma once
-#include"Triangle.h"
-#include"Circle.h"
-#include"Rectangle.h"
-#include"Diamond.h"
-#include"Square.h"
-#include"Gems.h"
+#include "Gems.h"
+#include "Circle.h"
+#include "Diamond.h"
+#include "Rectangle.h"
+#include "Square.h"
+#include "Triangle.h"
 #include <cstdlib>
 #include <ctime>
+#include <GL/glut.h>
+#include <vector>
+#include <algorithm>
+#include<string>
+using namespace std;
 class GameBoard {
-    public:
-   Gems* gem[10][10];
-    float progress;
-    int level;
-    int lives;
+private:
+    Gems* gem[8][8];
     const int NUM_ROWS = 8;
     const int NUM_COLS = 8;
     const float CELL_SIZE = 60.0f;
@@ -20,48 +22,22 @@ class GameBoard {
     const float BOARD_HEIGHT = NUM_ROWS * CELL_SIZE;
     const float BOARD_OFFSET_X = (1280 - BOARD_WIDTH) / 2.0f;
     const float BOARD_OFFSET_Y = CELL_SIZE;
+    int selectedRow1 = -1;
+    int selectedCol1 = -1;
+    int selectedRow2 = -1;
+    int selectedCol2 = -1;
+
 public:
-    GameBoard() : progress(0), level(1), lives(3) {
-    }
-    void generateboard() {
-        glClear(GL_COLOR_BUFFER_BIT);
-        //Outer Border
-        glColor3f(0.5f, 0.2f, 0.0f);
-        glLineWidth(3.0f);
-        glBegin(GL_LINE_LOOP);
-        glVertex2f(BOARD_OFFSET_X - 2, BOARD_OFFSET_Y - 2);
-        glVertex2f(BOARD_OFFSET_X + BOARD_WIDTH + 2, BOARD_OFFSET_Y - 2);
-        glVertex2f(BOARD_OFFSET_X + BOARD_WIDTH + 2, BOARD_OFFSET_Y + BOARD_HEIGHT + 2);
-        glVertex2f(BOARD_OFFSET_X - 2, BOARD_OFFSET_Y + BOARD_HEIGHT + 2);
-        glEnd();
-        float x_start = BOARD_OFFSET_X;
-        float y_start = BOARD_OFFSET_Y;
-        float cell_size = CELL_SIZE;
-        for (int i = 0; i < NUM_ROWS; ++i) {
-            for (int j = 0; j < NUM_COLS; ++j) {
-                float x_offset = x_start + j * cell_size;
-                float y_offset = y_start + i * cell_size;
-                //Squares
-                glColor3f(0.8f, 0.6f, 0.4f);
-                glBegin(GL_POLYGON);
-                glVertex2f(x_offset, y_offset);
-                glVertex2f(x_offset + cell_size, y_offset);
-                glVertex2f(x_offset + cell_size, y_offset + cell_size);
-                glVertex2f(x_offset, y_offset + cell_size);
-                glEnd();
-                //Inner borders
-                glColor3f(0.7f, 0.5f, 0.3f);
-                glLineWidth(1.0f);
-                glBegin(GL_LINE_LOOP);
-                glVertex2f(x_offset, y_offset);
-                glVertex2f(x_offset + cell_size, y_offset);
-                glVertex2f(x_offset + cell_size, y_offset + cell_size);
-                glVertex2f(x_offset, y_offset + cell_size);
-                glEnd();
-            }
-        }
-
-        glFlush();
-    }
-
+    GameBoard();
+    void initializeBoard();
+    Gems* createRandomGem(int row, int col);
+    void generateBoard();
+    void drawBoard(); 
+    void swapGems(int row1, int col1, int row2, int col2);
+    void removeMatches();
+    vector<pair<int, int>> findMatches();
+    void fillBoard();
+    bool isMatch(int row, int col);
+    bool checkRowMatch(int row, int col);
+    bool checkColumnMatch(int row, int col);
 };
