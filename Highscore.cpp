@@ -18,7 +18,7 @@ bool Highscore::updateScore(const Player& player) {
 bool Highscore::loadScore(const string& filename) {
     ifstream file(filename);
     if (!file.is_open()) {
-        return false; 
+        return false;
     }
     string name;
     float score;
@@ -30,7 +30,7 @@ bool Highscore::loadScore(const string& filename) {
 bool Highscore::saveScore(const string& filename) {
     ofstream file(filename);
     if (!file.is_open()) {
-        return false; 
+        return false;
     }
     file << player->getName() << " " << player->getScore() << endl;
     file.close();

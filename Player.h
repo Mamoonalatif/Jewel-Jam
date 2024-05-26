@@ -7,7 +7,7 @@ public:
     Player(string n, float s);
     void addscore(int s);
     string getName() const;
-    int getScore() const;
+    float getScore() const;
 };
 
 

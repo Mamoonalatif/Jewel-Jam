@@ -1,5 +1,4 @@
 #include "Rectangle.h"
-#include "Gems.h"
 Rectangle::Rectangle(float a, float b, float w, float h) : Gems("Rectangle"), width(w), height(h) {
     x = a;
     y = b;
