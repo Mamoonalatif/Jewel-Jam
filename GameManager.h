@@ -6,15 +6,14 @@ public:
     bool endState;
     bool playState;
     GameBoard* board;
-    GameManager(GameBoard* board) : mainMenuState(true), pauseState(false), endState(false), playState(false), board(board) {}
-    void setMainMenuState(bool state) { mainMenuState = state; }
-    bool getMainMenuState() const { return mainMenuState; }
-    void setPauseState(bool state) { pauseState = state; }
-    bool getPauseState() const { return pauseState; }
-    void setEndState(bool state) { endState = state; }
-    bool getEndState() const { return endState; }
-    void setPlayState(bool state) { playState = state; }
-    bool getPlayState() const { return playState; }
-    bool checkEnd() const { return endState; }
+    GameManager(GameBoard* board);
+    void setMainMenuState(bool state);
+    bool getMainMenuState() const;
+    void setPauseState(bool state);
+    bool getPauseState() const;
+    void setEndState(bool state);
+    bool getEndState() const;
+    void setPlayState(bool state); 
+    bool getPlayState() const;
+    bool checkEnd() const;
 };
-
