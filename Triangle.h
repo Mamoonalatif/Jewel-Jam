@@ -1,22 +1,34 @@
-#pragma once
 #include "Gems.h"
-#include <cmath>
+#include <GL/glut.h>
+
 class Triangle : public Gems {
 private:
-    int sidelength = 30;
+    float size; 
+    float color[3]; 
 public:
-    Triangle(float a, float b) : Gems(a, b, "Triangle") {
-        
+    Triangle(float a, float b, float s) : Gems("Triangle"), size(s) {
+        x = a;
+        y = b;
+       
+        color[0] = 0.0f; 
+        color[1] = 0.0f; 
+        color[2] = 1.0f; 
     }
+
     void draw() override {
-        glColor3f(1.0, 0.00, 0.00); 
+        glPushMatrix();
+        glTranslatef(x, y, 0.0f); 
+        glColor3fv(color); 
         glBegin(GL_TRIANGLES);
-        glVertex2f(x, y);
-        glVertex2f(x + sidelength, y);
-        glVertex2f(x + sidelength / 2, y + (sidelength * sqrt(3)) / 2);
+
+        glVertex2f(0.0f, size / 2.0f); 
+        glVertex2f(-size / 2.0f, -size / 2.0f);
+        glVertex2f(size / 2.0f, -size / 2.0f);
         glEnd();
+        glPopMatrix();
     }
+
     void move() override {
-        x = 0; 
+        // Implement movement logic for triangle if needed
     }
 };
